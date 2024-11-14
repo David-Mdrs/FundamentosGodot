@@ -26,6 +26,8 @@ func _vertical_movement(_delta: float) -> void:
 	
 		if is_on_floor():
 			if _on_floor == false:
+				global.spawn_effect("res://visual_effects/dust_particles/fall/fall_effect.tscn",
+					Vector2(0, 2), global_position, false)
 				_character_texture.action_animation("land")
 				set_physics_process(false)
 				_on_floor = true
@@ -38,6 +40,8 @@ func _vertical_movement(_delta: float) -> void:
 		if Input.is_action_just_pressed("move_jump") and _jump_count < 2:
 			_jump_count += 1
 			velocity.y = _jump_speed
+			global.spawn_effect("res://visual_effects/dust_particles/jump/jump_effect.tscn",
+				Vector2(0, 2), global_position, _character_texture.flip_h)
 
 func _horizontal_movement() -> void:
 	var _direction := Input.get_axis("move_left", "move_right")
@@ -60,7 +64,6 @@ func _attack_handler() -> void:
 func update_sword_state(_state: bool) -> void:
 	_has_sword = _state
 	_character_texture.update_suffix(_has_sword)
-
 
 func _on_attack_combo_timeout() -> void:
 	_attack_index = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cut3biylae0c5"]
+[gd_scene load_steps=49 format=3 uid="uid://cut3biylae0c5"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_lmc06"]
 [ext_resource type="Texture2D" uid="uid://c5qhrk0rbvm7f" path="res://character/without_sword/idle/1.png" id="1_u3av7"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://behjwwas348b2" path="res://character/with_sword/run/4.png" id="33_pnyi4"]
 [ext_resource type="Texture2D" uid="uid://bk7jvpwlnd0sm" path="res://character/with_sword/run/5.png" id="34_vafww"]
 [ext_resource type="Texture2D" uid="uid://c0iablljb7ucw" path="res://character/with_sword/run/6.png" id="35_x025b"]
+[ext_resource type="PackedScene" uid="uid://bpsdwkijfr6nk" path="res://visual_effects/dust_particles/fall/fall_effect.tscn" id="46_bux21"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0h1h3"]
 animations = [{
@@ -267,5 +268,9 @@ shape = SubResource("RectangleShape2D_2e23n")
 wait_time = 0.6
 one_shot = true
 
+[node name="FallEffect" parent="." instance=ExtResource("46_bux21")]
+
 [connection signal="animation_finished" from="Texture" to="Texture" method="_on_animation_finished"]
+[connection signal="frame_changed" from="Texture" to="Texture" method="_on_frame_changed"]
 [connection signal="timeout" from="AttackCombo" to="." method="_on_attack_combo_timeout"]
+[connection signal="frame_changed" from="FallEffect" to="Texture" method="_on_frame_changed"]

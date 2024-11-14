@@ -48,3 +48,10 @@ func update_suffix(_state: bool) -> void:
 func _on_animation_finished() -> void:
 	_is_on_action = false
 	_character.set_physics_process(true)
+
+
+func _on_frame_changed() -> void:
+	if animation == "run" or animation == "run_with_sword":
+		if frame == 1 or frame == 4:
+			global.spawn_effect("res://visual_effects/dust_particles/run/run_effect.tscn",
+				Vector2(0, 2), global_position, self.flip_h)
